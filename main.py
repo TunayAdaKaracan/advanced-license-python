@@ -24,11 +24,11 @@ class AdvancedLicense:
         self.server = server
         self.security_key = "YecoF0I6M05thxLeokoHuW8iUhTdIUInjkfF"
 
-    def is_valid(self, key: str):
+    def is_valid(self, key: str, name: str = None):
         rand = toBinary(str(uuid.uuid4()))
         secK = toBinary(self.security_key)
         key = toBinary(key)
-        resp = self.__request(xor(rand, secK), xor(rand, key))
+        resp = self.__request(xor(rand, secK), xor(rand, key), name)
         return self.__get_status(resp, rand, key, secK)
 
 
